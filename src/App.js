@@ -4,6 +4,7 @@ import { TodoSearch } from "./component/TodoSearch.jsx";
 import { TodoList } from "./component/TodoList.jsx";
 import { CreateTodoButton } from "./component/CreateTodoButton.jsx";
 import React from "react";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 // const defaultTodos = [
 //   { text: "Hola Amigo", completed: true },
@@ -16,28 +17,6 @@ import React from "react";
 
 // localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
 // localStorage.removeItem('TODOS_V1');
-
-function useLocalStorage(nameItem, initialValue) {
-   //Utilizamos localStorage para guardar la información inicial de la aplicación
-   const localStorageItem = localStorage.getItem(nameItem);
-
-   let parsedItem;
- 
-   if (!localStorageItem) {
-     localStorage.setItem(nameItem, JSON.stringify(initialValue));
-     parsedItem = initialValue;
-   } else {
-     parsedItem = JSON.parse(localStorageItem);
-   }
-
-   const [item, setItem] = React.useState(parsedItem);
-
-   const saveItem = (newItem) => {
-    localStorage.setItem(nameItem, JSON.stringify(newItem));
-    setItem(newItem);
-  };
-  return [item, saveItem];
-}
 
 function App() {
 
